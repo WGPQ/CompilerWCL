@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CF730DD1-98B7-4D3B-A24F-F766333177BF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CompilerWCL</RootNamespace>
+    <AssemblyName>CompilerWCL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autenticación">
+      <HintPath>..\..\..\Autenticación.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExpress.Data.19.2.3\lib\net452\DevExpress.Data.v19.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v19.2, Version=19.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DevExpress.Xpo.19.2.3\lib\net452\DevExpress.Xpo.v19.2.dll</HintPath>
+    </Reference>
+    <Reference Include="GCDesign, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GCDesign.1.0.0\lib\net46\GCDesign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Gif.Components, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Foundation.1.0.0.26\lib\net45\Gif.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VisualReactiveWinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0ee513efc52b401d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Visual.Reactive.WinForms.1.0.0\lib\VisualReactiveWinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="z.AdminCenter.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.AdminCenter.WebForm.Driver.1.0.0.41\lib\net45\z.AdminCenter.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="z.AdminCenter.WebForm.Driver, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.AdminCenter.WebForm.Driver.1.0.0.41\lib\net45\z.AdminCenter.WebForm.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Foundation, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Foundation.1.0.0.26\lib\net45\z.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="z.Foundation.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\z.Foundation.Model.1.0.0.1\lib\net45\z.Foundation.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="herramientas\GenerarTabla.cs" />
+    <Compile Include="model\Errores\Error.cs" />
+    <Compile Include="model\Errores\ErroresReconocidos.cs" />
+    <Compile Include="model\Lexico\AFD.cs" />
+    <Compile Include="model\Lexico\Automata.cs" />
+    <Compile Include="model\Lexico\CargarArchivo.cs" />
+    <Compile Include="model\Lexico\Error2.cs" />
+    <Compile Include="model\Lexico\ErroresReconocidos2.cs" />
+    <Compile Include="model\Lexico\TablaCompacta.cs" />
+    <Compile Include="model\Lexico\TDS.cs" />
+    <Compile Include="model\Lexico\TDSManager.cs" />
+    <Compile Include="model\Lexico\Token.cs" />
+    <Compile Include="model\Lexico\TokensReconocidos.cs" />
+    <Compile Include="model\Lexico\TTD.cs" />
+    <Compile Include="model\Lexico\TTDManager.cs" />
+    <Compile Include="model\Sintactico\AnalisisDeUnaEntrada.cs" />
+    <Compile Include="model\Sintactico\CargarSLR.cs" />
+    <Compile Include="model\Sintactico\Sintactico_srl.cs" />
+    <Compile Include="model\Sintactico\AnalizadorSLR.cs" />
+    <Compile Include="model\Sintactico\TablaCompacta.cs" />
+    <Compile Include="model\Sintactico\Transicion.cs" />
+    <Compile Include="Principal\Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal\Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Principal\FrmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal\FrmPrincipal.Designer.cs">
+      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmEditor.Designer.cs">
+      <DependentUpon>FrmEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmMovimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmMovimientos.Designer.cs">
+      <DependentUpon>FrmMovimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmAFD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmAFD.Designer.cs">
+      <DependentUpon>FrmAFD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmAlfabeto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmAlfabeto.Designer.cs">
+      <DependentUpon>FrmAlfabeto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmSimbolos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmSimbolos.Designer.cs">
+      <DependentUpon>FrmSimbolos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTC.Designer.cs">
+      <DependentUpon>FrmTC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTDS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTDS.Designer.cs">
+      <DependentUpon>FrmTDS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTokensReconocidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\FrmTokensReconocidos.Designer.cs">
+      <DependentUpon>FrmTokensReconocidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sintactico\FrmMatrizcesSintactico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sintactico\FrmMatrizcesSintactico.Designer.cs">
+      <DependentUpon>FrmMatrizcesSintactico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sintactico\FrmTablaCompacta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sintactico\FrmTablaCompacta.Designer.cs">
+      <DependentUpon>FrmTablaCompacta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sintactico\MainSintactico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sintactico\MainSintactico.Designer.cs">
+      <DependentUpon>MainSintactico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Sintactico\Pila_SLR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Sintactico\Pila_SLR.Designer.cs">
+      <DependentUpon>Pila_SLR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ViewInicio\FrmInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewInicio\FrmInicio.Designer.cs">
+      <DependentUpon>FrmInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ViewLogin\FrmPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewLogin\FrmPerfil.Designer.cs">
+      <DependentUpon>FrmPerfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ViewLogin\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewLogin\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ViewLogin\loginVerificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewLogin\loginVerificar.Designer.cs">
+      <DependentUpon>loginVerificar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="herramientas\Login_Resources\enviaremail.cs" />
+    <Compile Include="herramientas\Login_Resources\ManagerUser.cs" />
+    <Compile Include="herramientas\Login_Resources\persona.cs" />
+    <Compile Include="herramientas\Login_Resources\usuario.cs" />
+    <Compile Include="view\ViewInicio\Logo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewInicio\Logo.Designer.cs">
+      <DependentUpon>Logo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Lexico\MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Lexico\MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="model\Lexico\Lexico_tk.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\ViewLogin\recuperarcuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewLogin\recuperarcuenta.Designer.cs">
+      <DependentUpon>recuperarcuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ViewLogin\registrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ViewLogin\registrar.Designer.cs">
+      <DependentUpon>registrar.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Principal\Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal\FrmPrincipal.resx">
+      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmAFD.resx">
+      <DependentUpon>FrmAFD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmAlfabeto.resx">
+      <DependentUpon>FrmAlfabeto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmEditor.resx">
+      <DependentUpon>FrmEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmMovimientos.resx">
+      <DependentUpon>FrmMovimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmSimbolos.resx">
+      <DependentUpon>FrmSimbolos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmTC.resx">
+      <DependentUpon>FrmTC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmTDS.resx">
+      <DependentUpon>FrmTDS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\FrmTokensReconocidos.resx">
+      <DependentUpon>FrmTokensReconocidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sintactico\FrmMatrizcesSintactico.resx">
+      <DependentUpon>FrmMatrizcesSintactico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sintactico\FrmTablaCompacta.resx">
+      <DependentUpon>FrmTablaCompacta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sintactico\MainSintactico.resx">
+      <DependentUpon>MainSintactico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Sintactico\Pila_SLR.resx">
+      <DependentUpon>Pila_SLR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewInicio\FrmInicio.resx">
+      <DependentUpon>FrmInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewLogin\FrmPerfil.resx">
+      <DependentUpon>FrmPerfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewLogin\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewLogin\loginVerificar.resx">
+      <DependentUpon>loginVerificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewInicio\Logo.resx">
+      <DependentUpon>Logo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Lexico\MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="view\ViewLogin\recuperarcuenta.resx">
+      <DependentUpon>recuperarcuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ViewLogin\registrar.resx">
+      <DependentUpon>registrar.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\incripcion.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1329080-256 %282%29.png" />
+    <None Include="Resources\1329080-256 %282%291.png" />
+    <None Include="Resources\1329080-256 %283%29.png" />
+    <None Include="Resources\171491-256.png" />
+    <None Include="Resources\171491-24.png" />
+    <None Include="Resources\171491-48.png" />
+    <None Include="Resources\171491-48 %281%29.png" />
+    <None Include="Resources\171491-48 %281%291.png" />
+    <None Include="Resources\2529923-48.png" />
+    <None Include="Resources\532758-48.png" />
+    <None Include="Resources\1814089-48.png" />
+    <None Include="Resources\1814089-481.png" />
+    <None Include="Resources\3855614-48.png" />
+    <None Include="Resources\3855614-32.png" />
+    <Content Include="Resources\cerrar.png" />
+    <None Include="Resources\cerrar1.png" />
+    <Content Include="Resources\Diapositiva1.PNG" />
+    <None Include="Resources\flecha.png" />
+    <None Include="Resources\flecha1.png" />
+    <None Include="Resources\flecha2.png" />
+    <None Include="Resources\flecha21.png" />
+    <None Include="Resources\flecha3.png" />
+    <Content Include="Resources\fondo2.jpg" />
+    <None Include="Resources\fondo21.jpg" />
+    <None Include="Resources\fondo22.jpg" />
+    <None Include="Resources\images.png" />
+    <Content Include="Resources\log.png" />
+    <None Include="Resources\log1.png" />
+    <Content Include="Resources\maxi.png" />
+    <Content Include="Resources\minimazar.png" />
+    <None Include="Resources\minimazar1.png" />
+    <None Include="Resources\newfile.png" />
+    <None Include="Resources\openfile%281%29.png" />
+    <None Include="Resources\openfile.png" />
+    <None Include="Resources\pila%281%29.png" />
+    <None Include="Resources\pila.png" />
+    <None Include="Resources\pila1.png" />
+    <None Include="Resources\pila2.png" />
+    <None Include="Resources\newfile1.png" />
+    <None Include="Resources\openfile%281%291.png" />
+    <None Include="Resources\pila%281%291.png" />
+    <Content Include="Resources\play.png" />
+    <None Include="Resources\play1.png" />
+    <Content Include="Resources\producto.png" />
+    <Content Include="Resources\res.png" />
+    <None Include="Resources\run.png" />
+    <None Include="Resources\run1.png" />
+    <Content Include="Resources\salir.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\save1.png" />
+    <Content Include="Resources\save_file_disk_open_searsh_loading_clipboard_1513.png" />
+    <None Include="Resources\subir.png" />
+    <None Include="Resources\table.png" />
+    <None Include="Resources\table1.png" />
+    <None Include="Resources\tokensrecocnocids%281%29.png" />
+    <None Include="Resources\tokensrecocnocids.png" />
+    <None Include="Resources\table2.png" />
+    <None Include="Resources\table3.png" />
+    <None Include="Resources\tokensrecocnocids%281%291.png" />
+    <Content Include="Resources\WCL compiler_logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
