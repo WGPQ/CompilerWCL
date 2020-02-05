@@ -1,6 +1,9 @@
 ﻿using CompilerWCL.model.Lexico;
+using CompilerWCL.model.Semantico; // ojo
 using CompilerWCL.model.Sintactico;
 using CompilerWCL.Principal;
+using CompilerWCL.view.Principal;
+using CompilerWCL.view.Semantico;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,18 +25,23 @@ namespace CompilerWCL.view.Lexico
         Panel panel;
         string res = "";
         Form3 f3;
+        List<Form3> listaCode;
         List<string> lista = new List<string>();
+        int indiceCode = -1;
+        FrmPrincipal frmPri;
 
-
-        public FrmEditor()
+        public FrmEditor(FrmPrincipal p)
         {
             InitializeComponent();
             // timer1.Interval = 10;
             //timer1.Start();
-          
+            frmPri = p;
+            listaCode = new List<Form3>();
             Crearnuevapestaña();
-            Form3.r1.Text = Lexico_tk.enviarCodeEditor();
+            //Form3.r1.Text = Lexico_tk.enviarCodeEditor();
+            f3.rich_Editor.Text = Lexico_tk.enviarCodeEditor();
         }
+
          
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -169,20 +177,26 @@ namespace CompilerWCL.view.Lexico
                     lineasCodigo += lineas[i] + "\n";
                     numLinea = i + 1;
                 }
-                Form3.r1.Text = lineasCodigo;
-                //AddLineNumbers();
+                //Form3.r1.Text = lineasCodigo;
+                f3.rich_Editor.Text = lineasCodigo;
+                f3.AddLineNumbers();
             }
             catch (Exception ex)
             {
                 throw new System.ArgumentException("Error: al cargar el archivo", "original");
             }
         }
+
+        public void imprimir(String s)
+        {
+            Console.WriteLine(s);
+        }
         private void Crearnuevapestaña()
         {
             Panel panel = new Panel();
             panel.BackColor = Color.Red;
             panel.Dock = DockStyle.Fill;
-            TabPage nuevapestaña = new TabPage("Nuevo archivo" + contrapestaña);
+            TabPage nuevapestaña = new TabPage("Nuevo archivo " + contrapestaña);
             f3 = new Form3();
             tabControl1.TabPages.Add(nuevapestaña);
             f3.TopLevel = false;
@@ -194,13 +208,44 @@ namespace CompilerWCL.view.Lexico
             //nuevapestaña.Controls.Add(panel);
             // OpenConsola(f3, panel);
             listapestañas.Add(nuevapestaña);
+            
             contrapestaña++;
 
+            listaCode.Add(f3);
         }
-        private void pictureBox5_Click(object sender, EventArgs e)
+        
+        public void PrintSemantico(int num,string menssaje)
         {
+            //ejecuciones por pint
+            if (num==1)
+            {
+                rich_consola.SelectionColor = Color.White;
+                rich_consola.SelectedText = Environment.NewLine + menssaje;
+            }
+            //ejecuciones errores
+            if (num==2)
+            {
+                rich_consola.SelectionColor = Color.Red;
+                rich_consola.SelectedText = Environment.NewLine + menssaje;
+            }
+            //ejecuciones exitosa
+            if (num==3)
+            {
+                rich_consola.SelectionColor = Color.Green;
+                rich_consola.SelectedText = Environment.NewLine + menssaje;
+            }
+            
+        }
+        
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {            
             rich_consola.Text = "";
-            string txt_code = Form3.r1.Text;
+            //string txt_code = Form3.r1.Text;
+            //string txt_code = f3.rich_Editor.Text;
+
+            // indice de la ventana seleccionada para ejecutar codigo generado
+            indiceCode = tabControl1.SelectedIndex;          
+            string txt_code = listaCode[indiceCode].rich_Editor.Text;
             if (!"".Equals(txt_code))
             {
                 // ---- Ejecutar programa -----------
@@ -209,32 +254,42 @@ namespace CompilerWCL.view.Lexico
                 //txtl_consola.Text = Lexico_tk.erroresEjecucion;
 
                 // SINTACTICO
-
                 // si el lexico tiene 0 errores puedo seguir continuando con el sintactico
                 if (Lexico_tk.claseErroresReconocidos.list_erroresReconocidos.Count == 0)
                 {
                     Sintactico_srl.inicializarAnalizadorSRL();
+                    
                 }
 
-                string res = Lexico_tk.claseErroresReconocidos.imprimir_erroresConsola() + "Ejecucion Terminada";
+                // SEMANTICO
+                if (Lexico_tk.claseErroresReconocidos.list_erroresReconocidos.Count == 0)
+                {
+                    principalSemantico.iniciarSemamntico(this);
+                    principalSemantico.claseSemantica.generar_codigoCuadruplo();
+                }
+
+                string res = Lexico_tk.claseErroresReconocidos.imprimir_erroresConsola();
                 string[] imprimirconsola = res.Split('\n');
                 for (int i = 0; i < imprimirconsola.Length; i++)
                 {
-                    if (imprimirconsola[i] == "Ejecucion Terminada")
-                    {
-                        rich_consola.SelectionColor = Color.Green;
-                        rich_consola.SelectedText = Environment.NewLine + imprimirconsola[i];
-                    }
-                    else
-                    {
-                        rich_consola.SelectionColor = Color.Red;
-                        rich_consola.SelectedText = Environment.NewLine + imprimirconsola[i];
-                    }
+                    PrintSemantico(2, imprimirconsola[i]);
+
                 }
 
+
+                //Semantico_srl s = new Semantico_srl();
+                //pruebaSemantico s = new pruebaSemantico();
+                //s.generar_codigoCuadruplo();
                 // -------------------------------
                 //abrirforms(new FrmTDS());
+                imprimir("indiceCode ---->  " + indiceCode);
+                //frmPri.abrirformsecundarios(new FrmReglasReconocidas());
+                //frmPri.abrirReglas();
+                frmPri.ejecutarVentanaResultado();
+
+
             }
+            PrintSemantico(3, "Ejecucion Terminada");
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -286,6 +341,11 @@ namespace CompilerWCL.view.Lexico
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             Crearnuevapestaña();
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
     

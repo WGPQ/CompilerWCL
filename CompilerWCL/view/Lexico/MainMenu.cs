@@ -80,7 +80,8 @@ namespace CompilerWCL
 
         private void button6_Click(object sender, EventArgs e)
         {
-            FrmEditor f = new FrmEditor();
+            //FrmEditor f = new FrmEditor();
+            FrmEditor f = new FrmEditor(null);
             //if (FrmEditor.ruta2 != null)
            // {
                // f.cargarArchivo(FrmEditor.ruta2);

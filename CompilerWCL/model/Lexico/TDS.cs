@@ -23,5 +23,8 @@ namespace CompilerWCL.model.Lexico
             this.flagExistencia = flagExistencia;
         }
 
+        public TDS()
+        {
+        }
     }
 }

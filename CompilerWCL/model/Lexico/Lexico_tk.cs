@@ -86,15 +86,15 @@ namespace CompilerWCL.model.Lexico
 
 
         // Reconocer tokens
-        public static TokensReconocidos tk;
+        public static TokensReconocidos claseTokenReconocidos;
         public static List<Automata> listSimbolosReconocidos;
         public static List<Token> listTokensReconocidos;
         public static void getRutaTokensReconocidos(string ruta)
         {
             constructorTDS();
-            tk = new TokensReconocidos(ruta, listAlfabeto, claseMgTDS, claseErroresReconocidos);
-            listSimbolosReconocidos = tk.listSimbolosReconocidos(listAlfabeto, tc);
-            listTokensReconocidos = tk.listTokensReconocidos;
+            claseTokenReconocidos = new TokensReconocidos(ruta, listAlfabeto, claseMgTDS, claseErroresReconocidos);
+            listSimbolosReconocidos = claseTokenReconocidos.listSimbolosReconocidos(listAlfabeto, tc);
+            listTokensReconocidos = claseTokenReconocidos.listTokensReconocidos;
         }
 
         public static void getIniciarTokensReconocidos(string[] txt_Editor)
@@ -106,9 +106,9 @@ namespace CompilerWCL.model.Lexico
             
             constructorTDS();
             claseErroresReconocidos.resetearLista(); // reseteo la lista de errores reconocidos
-            tk = new TokensReconocidos(txt_Editor, listAlfabeto, claseMgTDS, claseErroresReconocidos);
-            listSimbolosReconocidos = tk.listSimbolosReconocidos(listAlfabeto, tc);
-            listTokensReconocidos = tk.listTokensReconocidos;
+            claseTokenReconocidos = new TokensReconocidos(txt_Editor, listAlfabeto, claseMgTDS, claseErroresReconocidos);
+            listSimbolosReconocidos = claseTokenReconocidos.listSimbolosReconocidos(listAlfabeto, tc);
+            listTokensReconocidos = claseTokenReconocidos.listTokensReconocidos;
             //erroresEjecucion = claseErroresReconocidos.imprimir_erroresConsola();
         }
 

@@ -45,6 +45,7 @@
             // 
             // rich_Editor
             // 
+            this.rich_Editor.AcceptsTab = true;
             this.rich_Editor.Dock = System.Windows.Forms.DockStyle.Left;
             this.rich_Editor.Location = new System.Drawing.Point(32, 0);
             this.rich_Editor.Name = "rich_Editor";
@@ -71,9 +72,10 @@
 
         }
 
+
         #endregion
 
-        private System.Windows.Forms.RichTextBox LineNumberTextBox;
-        private System.Windows.Forms.RichTextBox rich_Editor;
+        public System.Windows.Forms.RichTextBox LineNumberTextBox;
+        public System.Windows.Forms.RichTextBox rich_Editor;
     }
 }

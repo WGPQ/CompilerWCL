@@ -1,4 +1,5 @@
 ﻿using CompilerWCL.model.Lexico;
+using CompilerWCL.model.Semantico;
 using CompilerWCL.model.Sintactico;
 using System;
 using System.Collections.Generic;
@@ -149,14 +150,16 @@ namespace CompilerWCL.herramientas
         {
             DataTable dt = new DataTable();
             // creo mis columnas con su titulo
+            dt.Columns.Add("nro");
             dt.Columns.Add("numtoken");
             dt.Columns.Add("sinónimo");
             dt.Columns.Add("nombretoken");
             dt.Columns.Add("lexema");
-
+            int cont = 0;
             foreach (Token t in listAlfabeto)
             {
-                dt.Rows.Add(new Object[] { t.numtoken, t.sinonimo, t.nombretoken, t.lexema });
+                dt.Rows.Add(new Object[] { cont, t.numtoken, t.sinonimo, t.nombretoken, t.lexema });
+                cont++;
             }
             tabla.DataSource = dt;
         }
@@ -185,22 +188,23 @@ namespace CompilerWCL.herramientas
         public static void generarTableTDS(DataGridView tabla, List<TDS> listTDS)
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("num");
             dt.Columns.Add("Nombre");
             dt.Columns.Add("Tipo de Dato");
             dt.Columns.Add("Tamaño");
             dt.Columns.Add("Value");
-
+            int num = 0;
             foreach (TDS tds in listTDS)
             {
                 if (tds.nametk.Length <= 8)
                 {
-                    dt.Rows.Add(new Object[] { tds.nametk, tds.type, tds.size, tds.value });
+                    dt.Rows.Add(new Object[] { num, tds.nametk, tds.type, tds.size, tds.value });
                 }
                 else
                 {
-                    dt.Rows.Add(new Object[] { tds.nametk.Substring(0, 8), tds.type, tds.size, tds.value });
+                    dt.Rows.Add(new Object[] { num, tds.nametk.Substring(0, 8), tds.type, tds.size, tds.value });
                 }
-                
+                num++;
             }
             
             tabla.DataSource = dt; // aplico los cambios a la tabla entrante
@@ -247,6 +251,45 @@ namespace CompilerWCL.herramientas
             foreach (AnalisisDeUnaEntrada ade in analisisDeEntradas)
             {
                 dt.Rows.Add(new Object[] { ade.pila, ade.entarda, ade.accion});
+            }
+            tabla.DataSource = dt;
+        }
+
+        // SEMANTICO
+        public static void generarTabaReglasReconocidas(DataGridView tabla, List<Regla_produccion> listReglasReconocidas)
+        {
+            DataTable dt = new DataTable();
+            // creo mis columnas con su titulo
+            dt.Columns.Add("Nro");
+            dt.Columns.Add("NroRegla");
+            dt.Columns.Add("ParteIzquierda");
+            dt.Columns.Add("ParteDerecha");
+            dt.Columns.Add("Longitud");
+            dt.Columns.Add("Dato");
+            int cont = 1;
+            foreach (Regla_produccion lr in listReglasReconocidas)
+            {
+                dt.Rows.Add(new Object[] { cont, lr.numero_regla, lr.part_izquierda, lr.part_derecha,
+                    lr.long_Part_derecha, lr.dato});
+                cont++;
+            }
+            tabla.DataSource = dt;
+        }
+
+        public static void generarTablaCodigoIntermedio(DataGridView tabla, List<Cuadruplos> listaGen)
+        {
+            DataTable dt = new DataTable();
+            // creo mis columnas con su titulo
+            dt.Columns.Add("Nro");
+            dt.Columns.Add("Oper");
+            dt.Columns.Add("Ope1");
+            dt.Columns.Add("Ope2");
+            dt.Columns.Add("Resultado");
+            int cont = 1;
+            foreach (Cuadruplos lg in listaGen)
+            {
+                dt.Rows.Add(new Object[] { cont, lg.operador, lg.operando_1, lg.operando_2, lg.resultado});
+                cont++;
             }
             tabla.DataSource = dt;
         }

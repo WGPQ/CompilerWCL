@@ -98,8 +98,17 @@
     <Compile Include="model\Lexico\TokensReconocidos.cs" />
     <Compile Include="model\Lexico\TTD.cs" />
     <Compile Include="model\Lexico\TTDManager.cs" />
+    <Compile Include="model\Semantico\Atributos.cs" />
+    <Compile Include="model\Semantico\Cuadruplos.cs" />
+    <Compile Include="model\Semantico\principalSemantico.cs" />
+    <Compile Include="model\Semantico\prueba2Semantico.cs" />
+    <Compile Include="model\Semantico\prueba3Semantico.cs" />
+    <Compile Include="model\Semantico\pruebaSemantico.cs" />
+    <Compile Include="model\Semantico\Rutinas_semanticas.cs" />
+    <Compile Include="model\Semantico\Semantico_srl.cs" />
     <Compile Include="model\Sintactico\AnalisisDeUnaEntrada.cs" />
     <Compile Include="model\Sintactico\CargarSLR.cs" />
+    <Compile Include="model\Sintactico\Regla_produccion.cs" />
     <Compile Include="model\Sintactico\Sintactico_srl.cs" />
     <Compile Include="model\Sintactico\AnalizadorSLR.cs" />
     <Compile Include="model\Sintactico\TablaCompacta.cs" />
@@ -163,6 +172,18 @@
     </Compile>
     <Compile Include="view\Lexico\FrmTokensReconocidos.Designer.cs">
       <DependentUpon>FrmTokensReconocidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Semantico\FrmCodigoIntermedio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Semantico\FrmCodigoIntermedio.Designer.cs">
+      <DependentUpon>FrmCodigoIntermedio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\Semantico\FrmReglasReconocidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\Semantico\FrmReglasReconocidas.Designer.cs">
+      <DependentUpon>FrmReglasReconocidas.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Sintactico\FrmMatrizcesSintactico.cs">
       <SubType>Form</SubType>
@@ -272,6 +293,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\Lexico\FrmTokensReconocidos.resx">
       <DependentUpon>FrmTokensReconocidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Semantico\FrmCodigoIntermedio.resx">
+      <DependentUpon>FrmCodigoIntermedio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\Semantico\FrmReglasReconocidas.resx">
+      <DependentUpon>FrmReglasReconocidas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\Sintactico\FrmMatrizcesSintactico.resx">
       <DependentUpon>FrmMatrizcesSintactico.cs</DependentUpon>

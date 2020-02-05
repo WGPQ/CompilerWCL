@@ -85,11 +85,13 @@
             // tabControl1
             // 
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 64);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(800, 214);
             this.tabControl1.TabIndex = 3;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // panel9
             // 
@@ -230,6 +232,7 @@
             // 
             this.rich_consola.BackColor = System.Drawing.SystemColors.InfoText;
             this.rich_consola.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rich_consola.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rich_consola.Location = new System.Drawing.Point(0, 0);
             this.rich_consola.Name = "rich_consola";
             this.rich_consola.Size = new System.Drawing.Size(800, 152);
@@ -276,7 +279,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.RichTextBox rich_consola;
+        public System.Windows.Forms.RichTextBox rich_consola;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel9;

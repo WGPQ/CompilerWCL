@@ -13,15 +13,19 @@ namespace CompilerWCL.Principal
     public partial class Form3 : Form
     {
 
-       public static RichTextBox r1;
+        public static RichTextBox r1;
+        
         public  Form3()
         {
             InitializeComponent();
             r1 = rich_Editor;
-           
         }
 
-        
+        public static void llenarCode(String code)
+        {
+
+        }
+
         private void Form3_Load(object sender, EventArgs e)
         {
            
@@ -50,6 +54,7 @@ namespace CompilerWCL.Principal
 
             return w;
         }
+
         public void AddLineNumbers()
         {
             // create & set Point pt to (0,0)    
@@ -74,6 +79,32 @@ namespace CompilerWCL.Principal
                 LineNumberTextBox.Text += i + 1 + "\n";
             }
         }
+
+
+        /*public static void AddLineNumbers2()
+        {
+            // create & set Point pt to (0,0)    
+            Point pt = new Point(0, 0);
+            // get First Index & First Line from richTextBox1    
+            int First_Index = r1.GetCharIndexFromPosition(pt);
+            int First_Line = r1.GetLineFromCharIndex(First_Index);
+            // set X & Y coordinates of Point pt to ClientRectangle Width & Height respectively    
+            pt.X = ClientRectangle.Width;
+            pt.Y = ClientRectangle.Height;
+            // get Last Index & Last Line from richTextBox1    
+            int Last_Index = r1.GetCharIndexFromPosition(pt);
+            int Last_Line = r1.GetLineFromCharIndex(Last_Index);
+            // set Center alignment to LineNumberTextBox    
+            LineNumberTextBox.SelectionAlignment = HorizontalAlignment.Center;
+            // set LineNumberTextBox text to null & width to getWidth() function value    
+            LineNumberTextBox.Text = "";
+            LineNumberTextBox.Width = getWidth();
+            // now add each line number to LineNumberTextBox upto last line    
+            for (int i = First_Line; i <= Last_Line + 1; i++)
+            {
+                LineNumberTextBox.Text += i + 1 + "\n";
+            }
+        }*/
 
         private void rich_Editor_FontChanged(object sender, EventArgs e)
         {

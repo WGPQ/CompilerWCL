@@ -60,7 +60,8 @@ namespace CompilerWCL.model.Errores
             string mensajeError = this.listErrores[this.listErrores.FindIndex(x => x.numError == numError)].detalle;
             if (this.list_erroresReconocidos.Count <= 8) // 8 el numero de errores maximos
             {
-                this.list_erroresReconocidos.Add(new Error(numError, entrada_valor + " -> " + mensajeError + " : " + correcion + " ( Linea " + linea + " )"));
+                this.list_erroresReconocidos.Add(new Error(numError, "Error " +numError + " : " + 
+                    entrada_valor + " -> " + mensajeError + ": " + correcion + " ( Linea " + linea + " )"));
             }
         }
 

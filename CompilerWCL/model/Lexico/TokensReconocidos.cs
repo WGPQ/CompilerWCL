@@ -14,7 +14,7 @@ namespace CompilerWCL.model.Lexico
         public List<Object[]> listErrores;
         private bool banderaDeclare = false;
         private bool banderaMain = false;
-        private TDSManager claseMgTDS;
+        public TDSManager claseMgTDS;
 
         private string[] lineas_codigo;
         private ErroresReconocidos erroresR;
@@ -295,7 +295,7 @@ namespace CompilerWCL.model.Lexico
                     {
                         token = 0; // numtoken 0 es identificador
                         this.listTokensReconocidos.Add(new Token(this.listAlfabeto[token].numtoken, this.listAlfabeto[token].sinonimo,
-                            this.listAlfabeto[token].nombretoken, lexema, lineError));
+                            this.listAlfabeto[token].nombretoken, lexema.Substring(1), lineError)); //lexema.Substring(1) para quitar el #
                         if (banderaDeclare)
                         {
                             if (lexema.Length <= 30)

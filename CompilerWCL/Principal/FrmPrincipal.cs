@@ -1,4 +1,5 @@
 ﻿using CompilerWCL.view.Lexico;
+using CompilerWCL.view.Semantico;
 using CompilerWCL.view.Sintactico;
 using CompilerWCL.view.ViewInicio;
 using CompilerWCL.view.ViewLogin;
@@ -16,6 +17,7 @@ namespace CompilerWCL.view.Principal
 {
     public partial class FrmPrincipal : Form
     {
+        public int indiceResultado = -1;
         public FrmPrincipal(string user, string email)
         {
             InitializeComponent();
@@ -50,12 +52,15 @@ namespace CompilerWCL.view.Principal
 
 
         private Form formactivo2 = null;
-        private void abrirformsecundarios(Form hijo)
+        private Form formactivo3 = null;
+        public void abrirformsecundarios(Form hijo)
         {
             if (formactivo2 != null)
 
                 formactivo2.Close();
             formactivo2 = hijo;
+            formactivo3 = hijo;
+
             hijo.TopLevel = false;
             hijo.FormBorderStyle = FormBorderStyle.None;
             hijo.Dock = DockStyle.Fill;
@@ -66,6 +71,55 @@ namespace CompilerWCL.view.Principal
 
         }
 
+        public void abrirReglas()
+        {
+            abrirformsecundarios(new FrmReglasReconocidas());
+            panelvisualizadormenu.Visible = false;
+            panelvisualizadormenuiconos.Visible = true;
+            panelvisualizadorsecundario.Visible = true;
+        }
+
+        public void imprimir2(String d)
+        {
+            Console.WriteLine(d);
+        }
+
+        public void ejecutarVentanaResultado()
+        {
+            try
+            {
+                Console.WriteLine("1");
+                switch (indiceResultado)
+                {
+                    case 0:
+                        abrirformsecundarios(new FrmTDS());
+                        break;
+                    case 1:
+                        abrirformsecundarios(new FrmMovimientos());
+                        break;
+                    case 2:
+                        abrirformsecundarios(new Pila_SLR());
+                        break;
+                    case 3:
+                        abrirformsecundarios(new FrmReglasReconocidas());
+                        break;
+                    case 4:
+                        abrirformsecundarios(new FrmCodigoIntermedio());
+                        break;
+                    default:
+                        return;
+                        break;
+                }
+                panelvisualizadormenu.Visible = false;
+                panelvisualizadormenuiconos.Visible = true;
+                panelvisualizadorsecundario.Visible = true;
+                Console.WriteLine("Correcto");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error");
+            }
+        }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
         {
@@ -154,7 +208,7 @@ namespace CompilerWCL.view.Principal
         private void btnconsole_Click_1(object sender, EventArgs e)
         {
             //SI
-            abrirformsprimarios(new FrmEditor());
+            abrirformsprimarios(new FrmEditor(this));
             panelvisualizadormenuiconos.Visible = true;
         }
 
@@ -200,6 +254,7 @@ namespace CompilerWCL.view.Principal
                 panelvisualizadormenu.Visible = false;
                 panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 2; // tabla reglas reconocidas
             }
             catch (Exception ex)
             {
@@ -217,6 +272,7 @@ namespace CompilerWCL.view.Principal
                 panelvisualizadormenu.Visible = false;
                 panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 1; // tabla token reconocidos
             }
             catch (Exception ex)
             {
@@ -235,6 +291,7 @@ namespace CompilerWCL.view.Principal
                panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
                 panelvisualizadormenu.Visible = false;
+                indiceResultado = 0; // tabla simbolos
 
             }
             catch (Exception ex)
@@ -267,7 +324,7 @@ namespace CompilerWCL.view.Principal
                 panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
                 panelvisualizadormenu.Visible = false;
-
+                indiceResultado = 0; // tabla simbolos
             }
             catch (Exception ex)
             {
@@ -285,6 +342,7 @@ namespace CompilerWCL.view.Principal
                 panelvisualizadormenu.Visible = false;
                 panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 1; // tabla token reconocidos
             }
             catch (Exception ex)
             {
@@ -302,6 +360,7 @@ namespace CompilerWCL.view.Principal
                 panelvisualizadormenu.Visible = false;
                 panelvisualizadormenuiconos.Visible = true;
                 panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 2; // tabla pila sintactica
             }
             catch (Exception ex)
             {
@@ -322,6 +381,49 @@ namespace CompilerWCL.view.Principal
         {
             panelvisualizadorsecundario.Visible = false;
 
+        }
+
+        private void Button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureBox4_Click(object sender, EventArgs e)
+        {
+            
+                //SI
+            try
+            {
+                abrirformsecundarios(new FrmReglasReconocidas());
+                panelvisualizadormenu.Visible = false;
+                panelvisualizadormenuiconos.Visible = true;
+                panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 3; // tabla reglas reconocidas
+            }
+            catch (Exception ex)
+            {
+                panelvisualizadorsecundario.Visible = false;
+                MessageBox.Show("TDS no contiene datos \n Posiblemente el editoreste vacio!!!");
+            }
+        }
+
+        private void PictureBox6_Click(object sender, EventArgs e)
+        {
+
+            //SI
+            try
+            {
+                abrirformsecundarios(new FrmCodigoIntermedio());
+                panelvisualizadormenu.Visible = false;
+                panelvisualizadormenuiconos.Visible = true;
+                panelvisualizadorsecundario.Visible = true;
+                indiceResultado = 4; // tabla cuadruplos
+            }
+            catch (Exception ex)
+            {
+                panelvisualizadorsecundario.Visible = false;
+                MessageBox.Show("TDS no contiene datos \n Posiblemente el editoreste vacio!!!");
+            }
         }
     }
 }

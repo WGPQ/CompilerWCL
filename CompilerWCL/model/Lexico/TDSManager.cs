@@ -89,11 +89,11 @@ namespace CompilerWCL.model.Lexico
 
         public void valorVariable(Object valor)
         {
-            if (this.listaTDS.Count > 0)
+            /*if (this.listaTDS.Count > 0)
             {
                 this.listaTDS[this.listaTDS.Count - 1].value = valor;
                 this.listaTDS[this.listaTDS.Count - 1].flagExistencia = true;
-            }
+            }*/
             
         }
 
